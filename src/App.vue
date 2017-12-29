@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Zabbix PWA</a>
+      <a class="navbar-brand" href="/">Zabbix PWA</a>
+      <button class="btn btn-outline-light" v-if="loggedIn()" @click="logout()">Logout</button>
     </nav>
     <main>
       <!-- <img src="./assets/logo.png" alt="Vue.js PWA"> -->
@@ -13,9 +14,19 @@
 <script>
 // import blaze from 'blaze';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import auth from '@/auth';
 
 export default {
   name: 'app',
+  methods: {
+    loggedIn() {
+      return auth.loggedIn();
+    },
+    logout() {
+      auth.logout();
+      this.$router.replace('/login');
+    }
+  }
 };
 </script>
 
